@@ -1,5 +1,6 @@
 import { CiBoxList, CiCalendar, CiCalendarDate, CiHome } from "react-icons/ci";
 import { Link, useLocation } from "react-router-dom";
+import Nav from "./Nav";
 export default function Layout({ children }) {
   const sidebarItems = [
     {
@@ -28,6 +29,7 @@ export default function Layout({ children }) {
   console.log(pathname);
   return (
     <div className="bg-white text-gray-600 my-10 px-5 xl:mx-80">
+       <Nav />
       <div className="flex">
         <div className="shad my-5 rounded-md h-min">
           <ul className="">
