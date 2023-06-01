@@ -1,10 +1,15 @@
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import Dashboard from "./components/Dashboard";
+import Layout from "./components/Layout";
 
 function App() {
   return (
-    <div className='bg-red-500'>
-hello 
-    </div>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+      </Routes>
+    </Layout>
   );
 }
 

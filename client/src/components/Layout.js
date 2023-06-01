@@ -1,6 +1,5 @@
 import { CiBoxList, CiCalendar, CiCalendarDate, CiHome } from "react-icons/ci";
-import { Link } from "react-router-dom";
-import Nav from "./Nav";
+import { Link, useLocation } from "react-router-dom";
 export default function Layout({ children }) {
   const sidebarItems = [
     {
@@ -25,9 +24,10 @@ export default function Layout({ children }) {
       icon: CiCalendar,
     },
   ];
+  const { pathname } = useLocation();
+  console.log(pathname);
   return (
     <div className="bg-white text-gray-600 my-10 px-5 xl:mx-80">
-      <Nav />
       <div className="flex">
         <div className="shad my-5 rounded-md h-min">
           <ul className="">
@@ -35,11 +35,11 @@ export default function Layout({ children }) {
               return (
                 <li
                   key={name}
-                  //   className={
-                  //     asPath === href
-                  //       ? "font-[500] text-gray-900 bg-gray-200 pr-20 border-b"
-                  //       : "pr-20 border-b"
-                  //   }
+                  className={
+                    pathname === href
+                      ? "font-[500] text-gray-900 bg-gray-200 pr-20 border-b"
+                      : "pr-20 border-b"
+                  }
                 >
                   <Link to={href}>
                     <span className="text-2xl">
