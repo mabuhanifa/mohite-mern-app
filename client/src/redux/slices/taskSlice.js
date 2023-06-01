@@ -4,7 +4,7 @@ const initialState = {
   tasks: [],
 };
 
-const filterSlice = createSlice({
+const tasksSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
@@ -17,5 +17,5 @@ const filterSlice = createSlice({
   },
 });
 
-export default filterSlice.reducer;
-export const { addTask, deleteTask } = filterSlice.actions;
+export default tasksSlice.reducer;
+export const { addTask, deleteTask } = tasksSlice.actions;

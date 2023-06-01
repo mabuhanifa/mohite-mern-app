@@ -1,12 +1,32 @@
+import { useState } from "react";
 import { VscChromeClose } from "react-icons/vsc";
+import { useDispatch, useSelector } from "react-redux";
+import { addTask } from "../redux/slices/taskSlice";
 
 export default function Modal({ view, setModal }) {
-  if (!view) return null;
+  const dispatch = useDispatch();
+  const { tasks } = useSelector((state) => state);
+
+  console.log(tasks);
+
+  const [title, setTitle] = useState("");
+  if (!view) {
+    return null;
+  }
   const closeModal = (e) => {
     if (e.target.id === "container") {
       setModal((m) => !m);
     }
   };
+
+  const createTodo = () => {
+    dispatch(
+      addTask({
+        title,
+      })
+    );
+  };
+
   return (
     <div
       id="container"
@@ -22,7 +42,12 @@ export default function Modal({ view, setModal }) {
           <VscChromeClose className="text-xl" />
         </button>
         <div>
-          <input type="text" placeholder="Title" className="p-2 bg-slate-200 w-96" />
+          <input
+            type="text"
+            placeholder="Title"
+            className="p-2 bg-slate-200 w-96"
+            onChange={(e) => setTitle(e.target.value)}
+          />
           <br />
           <textarea
             type="text"
@@ -30,9 +55,18 @@ export default function Modal({ view, setModal }) {
             className="p-2 bg-slate-200 my-5 w-96"
           />
           <br />
-          <input type="text" placeholder="Data" className="p-2 bg-slate-200 w-96" />
+          <input
+            type="text"
+            placeholder="Data"
+            className="p-2 bg-slate-200 w-96"
+          />
           <br />
-        <button className="bg-blue-500 px-10 text-white p-2 rounded w-full mt-10">Create</button>
+          <button
+            className="bg-blue-500 px-10 text-white p-2 rounded w-full mt-10"
+            onClick={createTodo}
+          >
+            Create
+          </button>
         </div>
       </div>
     </div>

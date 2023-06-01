@@ -26,7 +26,6 @@ export default function Layout({ children }) {
     },
   ];
   const { pathname } = useLocation();
-  console.log(pathname);
   return (
     <div className="bg-white text-gray-600 my-10 px-2 lg:px-5 xl:mx-80">
       <Nav />
@@ -35,7 +34,7 @@ export default function Layout({ children }) {
           <ul className="grid grid-cols-2 lg:flex flex-col">
             {sidebarItems.map(({ name, href, icon: Icon }) => {
               return (
-                <Link to={href}>
+                <Link to={href} key={name}>
                   <li
                     key={name}
                     className={
