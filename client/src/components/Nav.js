@@ -9,18 +9,18 @@ export default function Nav() {
     const [modal, setModal] = useState(false);
   return (
     <>
-      <nav className="shad rounded-lg py-3 px-5 flex justify-between items-center">
-        <div className="flex items-center justify-between">
+      <nav className="flex flex-col-reverse gap-y-5 shad rounded-lg py-3 px-5 lg:flex-row justify-between items-center">
+        <div className="lg:flex items-center justify-between hidden ">
           <span className="font-bold">
             <TiTick className="text-blue-500 inline text-2xl mb-1" />
             Task Manager
           </span>
         </div>
-        <div className="flex items-center">
+        <div className="flex flex-col gap-y-5 lg:flex-row items-center">
           <div className="relative">
             <input
               type="text"
-              className="bg-gray-200 rounded-md py-2 w-96 px-10 "
+              className="bg-gray-200 rounded-md py-2 w-96 px-10"
               placeholder="Search"
             />
             <RiSearchLine className="text-gray-400 text-2xl absolute left-2 top-2" />
