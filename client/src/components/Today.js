@@ -12,7 +12,7 @@ export default function Today() {
       <Toaster />
       {isLoading && <h1>Loading...</h1>}
       {isError && <h1>Error...</h1>}
-      <div>
+      <div className="flex gap-1 flex-wrap justify-center">
         {isSuccess &&
           tasks
             .filter((task) => task.date === today)

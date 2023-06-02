@@ -12,7 +12,7 @@ export default function Dashboard() {
       <Toaster />
       {isLoading && <h1>Loading...</h1>}
       {isError && <h1>Error...</h1>}
-      <div>
+      <div className="flex gap-2 lg:gap-4 xl:gap-5 flex-wrap justify-center">
         {isSuccess &&
           tasks
             .filter((task) =>

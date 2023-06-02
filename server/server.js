@@ -5,6 +5,7 @@ const taskRoute = require("./routes/taskRoute");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
+const errorHandler = require("./middlewares/errorHandler");
 app.use(express.json());
 app.use(cors());
 const port = process.env.PORT || 5000;
@@ -14,6 +15,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/task", taskRoute);
+app.use(errorHandler);
 
 // database connection
 mongoose
