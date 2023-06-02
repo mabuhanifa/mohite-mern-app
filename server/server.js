@@ -32,12 +32,7 @@ app.post("/task", async (req, res) => {
 app.get("/task", async (req, res) => {
   try {
     const tasks = await Task.find({});
-    res.status(200).json({
-      status: "success",
-      data: {
-        tasks,
-      },
-    });
+    res.send(tasks);
   } catch (error) {
     console.log(error);
   }
