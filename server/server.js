@@ -4,12 +4,16 @@ require("dotenv").config();
 
 const app = express();
 const cors = require("cors");
-const mongoose  = require("mongoose");
+const mongoose = require("mongoose");
 app.use(express.json());
 app.use(cors());
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
-app.post(async (req, res) => {
+app.get("/", (req, res) => {
+  res.send("Node Application Server Running");
+});
+
+app.post("/task", async (req, res) => {
   try {
     const task = await Task.create(req.body);
     res.status(201).json({
@@ -18,7 +22,21 @@ app.post(async (req, res) => {
         task,
       },
     });
-    console.log(user);
+    console.log(task);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.get("/task", async (req, res) => {
+  try {
+    const tasks = await Task.find({});
+    res.status(200).json({
+      status: "success",
+      data: {
+        tasks,
+      },
+    });
   } catch (error) {
     console.log(error);
   }
@@ -34,8 +52,6 @@ mongoose
     console.log(`Database connection is successful 🛢`);
   });
 
-
-
 app.listen(port, () => {
-  console.log(` Server is running on port ${port}... `);
+  console.log(`Server is running on port ${port}`);
 });
