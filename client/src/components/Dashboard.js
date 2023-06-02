@@ -1,4 +1,5 @@
 import React from "react";
+import { Toaster } from "react-hot-toast";
 import { useGetTasksQuery } from "../redux/slices/apiSlice";
 
 export default function Dashboard() {
@@ -8,6 +9,7 @@ export default function Dashboard() {
 
   return (
     <div>
+      <Toaster />
       {isLoading && <h1>Loading...</h1>}
       {isError && <h1>Error...</h1>}
       <div>

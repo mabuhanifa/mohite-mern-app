@@ -15,15 +15,15 @@ app.get("/", (req, res) => {
 
 app.post("/task", async (req, res) => {
   try {
-    const { title, description, status, priority } = req.body;
-    const task = await Task.create({ title, description, status, priority });
+    const { title, description, status, date } = req.body;
+    // const task = await Task.create({ title, description, status, date });
     res.status(201).json({
       status: "success",
-      data: {
-        task,
-      },
+      // data: {
+      //   task,
+      // },
     });
-    console.log(task);
+    console.log(req.body);
   } catch (error) {
     console.log(error);
   }
