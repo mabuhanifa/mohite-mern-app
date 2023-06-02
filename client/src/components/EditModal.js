@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { VscChromeClose } from "react-icons/vsc";
-import { useAddTaskMutation } from "../redux/slices/apiSlice";
+import { useEditTaskMutation } from "../redux/slices/apiSlice";
 
 export default function EditModal({ view, setModal, task }) {
+  const [editTask] = useEditTaskMutation();
   const [selectedOption, setSelectedOption] = useState("pending");
   const [date, setDate] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   console.log(selectedOption, date, title, description);
-
-  const [addTask] = useAddTaskMutation();
 
   const options = [
     { value: "completed", label: "Completed" },
@@ -31,21 +30,28 @@ export default function EditModal({ view, setModal, task }) {
     }
   };
 
-  const createTodo = (e) => {
+  const updatedTask = (e) => {
     e.preventDefault();
-    addTask({
+    const updatedTask = {
+      title: title.length ? title : task.title,
+      description: description.length ? description : task.description,
+      status: selectedOption.length ? selectedOption : task.status,
+      date: date.length ? date : task.date,
+    };
+    editTask({
       title,
       description,
       status: selectedOption,
       date,
     }).then((res) => {
       if (res.data.status === "success") {
-        toast.success("Task added successfully", { duration: 2500 });
+        toast.success("Task Updated successfully", { duration: 2500 });
         setTimeout(() => {
           setModal((m) => !m);
         }, 1000);
       }
     });
+    console.log(updatedTask);
   };
   return (
     <>
@@ -72,7 +78,6 @@ export default function EditModal({ view, setModal, task }) {
                 onChange={(e) => setTitle(e.target.value)}
                 required
                 defaultValue={task.title}
-                
               />
               <br />
               <textarea
@@ -111,7 +116,7 @@ export default function EditModal({ view, setModal, task }) {
               <br />
               <button
                 className="bg-blue-500 px-10 text-white p-2 w-96 rounded"
-                onClick={createTodo}
+                onClick={updatedTask}
                 type="submit"
               >
                 Create
