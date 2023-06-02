@@ -53,7 +53,7 @@ export default function Modal({ view, setModal }) {
       <Toaster />
       <div
         id="container"
-        className="bg-opacity-30 backdrop-blur-lg fixed inset-0 flex justify-center z-15 py-10"
+        className="bg-opacity-30 backdrop-blur-lg fixed inset-0 flex justify-center z-20 py-10"
         onClick={closeModal}
       >
         <div className="max-w-2xl rounded-xl p-10 relative shad h-max">

@@ -27,7 +27,7 @@ export default function Layout({ children }) {
   ];
   const { pathname } = useLocation();
   return (
-    <div className="bg-white text-gray-600 my-10 px-2 lg:px-5 xl:mx-80">
+    <div className="bg-white text-gray-600 my-10 px-2 lg:px-5 xl:mx-20">
       <Nav />
       <div className="lg:flex">
         <div className="shad my-5 rounded-md h-min p-2">
