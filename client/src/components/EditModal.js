@@ -38,12 +38,7 @@ export default function EditModal({ view, setModal, task }) {
       status: selectedOption.length ? selectedOption : task.status,
       date: date.length ? date : task.date,
     };
-    editTask({
-      title,
-      description,
-      status: selectedOption,
-      date,
-    }).then((res) => {
+    editTask({ id: task._id, data: updatedTask }).then((res) => {
       if (res.data.status === "success") {
         toast.success("Task Updated successfully", { duration: 2500 });
         setTimeout(() => {

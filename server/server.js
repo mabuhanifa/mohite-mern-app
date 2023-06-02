@@ -49,6 +49,24 @@ app.delete("/task/:id", async (req, res) => {
   }
 });
 
+app.patch("/task/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = req.body;
+    const task = await Task.updateOne({ _id: id }, data, {
+      runValidators: true,
+    });
+    res.status(201).json({
+      status: "success",
+      data: {
+        task,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 // database connection
 mongoose
   .connect(process.env.MONGO_URI, {
