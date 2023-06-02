@@ -4,9 +4,6 @@ import { useGetTasksQuery } from "../redux/slices/apiSlice";
 
 export default function Dashboard() {
   const { data: tasks, isError, isLoading, isSuccess } = useGetTasksQuery();
-
-  console.log(tasks);
-
   return (
     <div>
       <Toaster />
