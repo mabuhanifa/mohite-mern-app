@@ -27,7 +27,7 @@ export default function Layout({ children }) {
   ];
   const { pathname } = useLocation();
   return (
-    <div className="bg-white text-gray-600 my-10 px-2 lg:px-5 xl:mx-20">
+    <div className="bg-white text-gray-600 my-10 px-2 lg:px-5 xl:mx-5 2xl:mx-20">
       <Nav />
       <div className="lg:flex">
         <div className="shad my-5 rounded-md h-min p-2">
@@ -39,14 +39,16 @@ export default function Layout({ children }) {
                     key={name}
                     className={
                       pathname === href
-                        ? "font-[500] text-gray-900 bg-gray-200 lg:pr-20 border-b rounded"
-                        : "lg:pr-20 border-b"
+                        ? "font-[500] text-gray-900 bg-gray-200 lg:pr-5 border-b rounded"
+                        : "lg:pr-5 border-b"
                     }
                   >
-                    <span className="text-2xl">
-                      <Icon className="inline lg:mx-5 lg:my-5 m-2" />
-                    </span>
-                    <span className="">{name}</span>
+                    <div className="flex items-center p-5 gap-x-2">
+                      <span className="text-2xl">
+                        <Icon className="" />
+                      </span>
+                      <span className="">{name}</span>
+                    </div>
                   </li>
                 </Link>
               );

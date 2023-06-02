@@ -10,28 +10,32 @@ export default function Task({ task }) {
     console.log(res);
   };
   return (
-    <div className="p-3 shad my-2 h-52 rounded flex flex-col justify-between md:flex-row md:items-center gap-x-20 relative md:h-20 w-full">
-      <p className="truncate md:w-40 text-lg font-bold">{task.title}</p>
+    <div className="p-3 shad my-2 h-52 rounded flex flex-col justify-between lg:flex-row lg:items-center gap-x-5 2xl:gap-x-10 relative lg:h-20 w-full">
+      <p className="truncate lg:w-40 text-lg font-bold">{task.title}</p>
 
-      <p className="md:w-96 truncate ">Description : {task.description}</p>
-      <p className="text-sm">
-        Created At :
+      <p className="lg:w-96 truncate ">{task.description}</p>
+      <div className="flex items-center">
+        <span className="text-sm">Created At :</span>
         <span className="text-gray-400 ml-2 text-xs font-semibold">
           {task.createdAt.substring(0, 10)}
         </span>
-      </p>
-      <p className="mr-40 text-sm">
-        Pending Time :
-        <span className="text-gray-400 ml-2 text-xs font-semibold">{task.date}</span>
-      </p>
-      <div className="md:absolute top-14 md:top-5 right-0">
+      </div>
+
+      <div className="flex items-center">
+        <span className="text-sm">Pending At :</span>{" "}
+        <span className="text-gray-400 ml-2 text-xs font-semibold mr-28 ">
+          {task.date}
+        </span>
+      </div>
+
+      <div className="lg:absolute top-14 lg:top-5 right-0">
         <button
-          className="md:px-5 py-2 text-red-600 mr-5 md:mr-0"
+          className="lg:px-5 py-2 text-red-600 mr-5 lg:mr-0"
           onClick={handleDelete}
         >
           <VscTrash size={20} />
         </button>
-        <button className="md:px-5 py-2 text-green-600">
+        <button className="lg:px-5 py-2 text-green-600">
           <CiEdit size={20} />
         </button>
       </div>
