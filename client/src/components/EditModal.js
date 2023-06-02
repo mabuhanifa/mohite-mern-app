@@ -8,6 +8,7 @@ export default function EditModal({ view, setModal, task }) {
   const [date, setDate] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  console.log(selectedOption, date, title, description);
 
   const [addTask] = useAddTaskMutation();
 
@@ -70,7 +71,8 @@ export default function EditModal({ view, setModal, task }) {
                 className="p-2 bg-slate-200 w-96"
                 onChange={(e) => setTitle(e.target.value)}
                 required
-                value={task.title}
+                defaultValue={task.title}
+                
               />
               <br />
               <textarea
@@ -79,13 +81,13 @@ export default function EditModal({ view, setModal, task }) {
                 className="p-2 bg-slate-200 my-5 w-96"
                 onChange={(e) => setDescription(e.target.value)}
                 required
-                value={task.description}
+                defaultValue={task.description}
               />
               <br />
               <div>
                 <h4 className="text-lg font-bold mb-2">Status</h4>
                 <select
-                  value={task.status ? task.status : "Select an option"}
+                  defaultValue={task.status ? task.status : "Select an option"}
                   onChange={handleChange}
                   className="px-20 py-2 border border-gray-400 rounded"
                 >
@@ -102,7 +104,7 @@ export default function EditModal({ view, setModal, task }) {
                   type="date"
                   className="w-96 p-2 rounded shad"
                   required
-                  value={task.date}
+                  defaultValue={task.date}
                   onChange={(e) => setDate(e.target.value)}
                 />
               </div>
