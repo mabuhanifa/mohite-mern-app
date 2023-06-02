@@ -35,4 +35,22 @@ const deleteTask = async (req, res) => {
   }
 };
 
-module.exports = { getTasks, createTask, deleteTask };
+const updateTask = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = req.body;
+    const task = await Task.updateOne({ _id: id }, data, {
+      runValidators: true,
+    });
+    res.status(201).json({
+      status: "success",
+      data: {
+        task,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { getTasks, createTask, deleteTask, updateTask };
