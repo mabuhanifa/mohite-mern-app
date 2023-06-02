@@ -1,18 +1,25 @@
 import { useState } from "react";
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
 import { VscChromeClose } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
 import { addTask } from "../redux/slices/taskSlice";
 
 export default function Modal({ view, setModal }) {
-  const [value, onChange] = useState(new Date());
-  const dispatch = useDispatch();
-  const { tasks } = useSelector((state) => state);
-
-  console.log(value);
-
+  const [selectedOption, setSelectedOption] = useState("pending");
+  const [date, setDate] = useState("");
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const tasks = useSelector((state) => state.tasks);
+  console.log(tasks);
+  const options = [
+    { value: "completed", label: "Completed" },
+    { value: "pending", label: "Pending" },
+  ];
+
+  const handleChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+  const dispatch = useDispatch();
+
   if (!view) {
     return null;
   }
@@ -22,10 +29,14 @@ export default function Modal({ view, setModal }) {
     }
   };
 
-  const createTodo = () => {
+  const createTodo = (e) => {
+    e.preventDefault();
     dispatch(
       addTask({
         title,
+        description,
+        status: selectedOption,
+        date,
       })
     );
   };
@@ -33,7 +44,7 @@ export default function Modal({ view, setModal }) {
   return (
     <div
       id="container"
-      className="bg-opacity-30 backdrop-blur fixed inset-0 flex justify-center z-15 py-10"
+      className="bg-opacity-30 backdrop-blur-lg fixed inset-0 flex justify-center z-15 py-10"
       onClick={closeModal}
     >
       <div className="max-w-2xl rounded-xl p-10 relative shad h-max">
@@ -45,39 +56,56 @@ export default function Modal({ view, setModal }) {
           <VscChromeClose className="text-xl" />
         </button>
         <div>
-          <input
-            type="text"
-            placeholder="Title"
-            className="p-2 bg-slate-200 w-96"
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <br />
-          <textarea
-            type="text"
-            placeholder="Description"
-            className="p-2 bg-slate-200 my-5 w-96"
-          />
-          <br />
-          <input
-            type="text"
-            placeholder="Status"
-            className="p-2 bg-slate-200 w-96"
-          />
-          <br />
-          <input
-            type="text"
-            placeholder="Priority"
-            className="p-2 bg-slate-200 w-96 my-5"
-          />
-          <div className="flex justify-center">
-            <Calendar onChange={onChange} value={value} />
-          </div>
-          <button
-            className="bg-blue-500 px-10 text-white p-2 rounded w-full mt-10"
-            onClick={createTodo}
-          >
-            Create
-          </button>
+          <form>
+            <input
+              type="text"
+              placeholder="Title"
+              className="p-2 bg-slate-200 w-96"
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+            <br />
+            <textarea
+              type="text"
+              placeholder="Description"
+              className="p-2 bg-slate-200 my-5 w-96"
+              onChange={(e) => setDescription(e.target.value)}
+              required
+            />
+            <br />
+            <div>
+              <h4 className="text-lg font-bold mb-2">Status</h4>
+              <select
+                value={selectedOption ? selectedOption : "Select an option"}
+                onChange={handleChange}
+                className="px-20 py-2 border border-gray-400 rounded"
+              >
+                {options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <h4 className="text-lg font-bold mb-2 mt-5">Date</h4>
+              <input
+                type="date"
+                className="w-96 p-2 rounded shad"
+                required
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+              />
+            </div>
+            <br />
+            <button
+              className="bg-blue-500 px-10 text-white p-2 w-96 rounded"
+              onClick={createTodo}
+              type="submit"
+            >
+              Create
+            </button>
+          </form>
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 export default function Dashboard() {
   const [tasks, setTasks] = useState([]);
-  console.log(tasks);
+  // console.log(tasks);
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("http://localhost:5000/task");
