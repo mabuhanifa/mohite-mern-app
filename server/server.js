@@ -15,7 +15,8 @@ app.get("/", (req, res) => {
 
 app.post("/task", async (req, res) => {
   try {
-    const task = await Task.create(req.body);
+    const { title, description, status, priority } = req.body;
+    const task = await Task.create({ title, description, status, priority });
     res.status(201).json({
       status: "success",
       data: {
