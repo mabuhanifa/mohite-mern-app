@@ -57,10 +57,15 @@ export default function Modal({ view, setModal }) {
           <br />
           <input
             type="text"
-            placeholder="Data"
+            placeholder="Status"
             className="p-2 bg-slate-200 w-96"
           />
           <br />
+          <input
+            type="text"
+            placeholder="Priority"
+            className="p-2 bg-slate-200 w-96 my-5"
+          />
           <button
             className="bg-blue-500 px-10 text-white p-2 rounded w-full mt-10"
             onClick={createTodo}
