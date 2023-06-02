@@ -20,7 +20,6 @@ export default function Modal({ view, setModal }) {
     setSelectedOption(event.target.value);
   };
 
-  // const dispatch = useDispatch();
 
   if (!view) {
     return null;
@@ -57,7 +56,7 @@ export default function Modal({ view, setModal }) {
         onClick={closeModal}
       >
         <div className="max-w-2xl rounded-xl p-10 relative shad h-max">
-          <h1 className="text-2xl font-bold mb-10">Create a new Todo</h1>
+          <h1 className="text-2xl font-bold mb-10">Create a new Task</h1>
           <button
             className=" text-red-500 absolute top-2 right-2 bg-red-200 p-2 rounded-full hover:bg-red-300"
             onClick={() => setModal((m) => !m)}
