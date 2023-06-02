@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { CiEdit } from "react-icons/ci";
 import { VscTrash } from "react-icons/vsc";
 import { useDeleteTaskMutation } from "../redux/slices/apiSlice";
+import EditModal from "./EditModal";
 
 export default function Task({ task }) {
+  const [modal, setModal] = useState(false);
   const [deleteTask] = useDeleteTaskMutation();
   const handleDelete = async () => {
     const res = await deleteTask(task._id);
@@ -19,6 +21,9 @@ export default function Task({ task }) {
         <p className="truncate lg:w-40 text-lg font-bold">{task.title}</p>
 
         <p className="lg:w-96 truncate ">{task.description}</p>
+        <div>
+          <p>Status: {task.status}</p>
+        </div>
         <div className="flex items-center">
           <span className="text-sm">Created At :</span>
           <span className="text-gray-400 ml-2 text-xs font-semibold">
@@ -40,12 +45,17 @@ export default function Task({ task }) {
           >
             <VscTrash size={20} />
           </button>
-          <button className="lg:px-5 py-2 text-green-600">
+          <button
+            className="lg:px-5 py-2 text-green-600"
+            onClick={() => setModal(true)}
+          >
             <CiEdit size={20} />
           </button>
         </div>
       </div>
-      <div></div>
+      <div>
+        {modal && <EditModal view={modal} setModal={setModal} task={task} />}
+      </div>
     </>
   );
 }

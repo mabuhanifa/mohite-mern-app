@@ -1,52 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { VscChromeClose } from 'react-icons/vsc';
-import { useAddTaskMutation } from '../redux/slices/apiSlice';
+import { VscChromeClose } from "react-icons/vsc";
+import { useAddTaskMutation } from "../redux/slices/apiSlice";
 
-export default function EditModal({ view, setModal }) {
-    const [selectedOption, setSelectedOption] = useState("pending");
-    const [date, setDate] = useState("");
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-  
-    const [addTask] = useAddTaskMutation();
-  
-    const options = [
-      { value: "completed", label: "Completed" },
-      { value: "pending", label: "Pending" },
-    ];
-  
-    const handleChange = (event) => {
-      setSelectedOption(event.target.value);
-    };
-  
-    // const dispatch = useDispatch();
-  
-    if (!view) {
-      return null;
+export default function EditModal({ view, setModal, task }) {
+  const [selectedOption, setSelectedOption] = useState("pending");
+  const [date, setDate] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
+  const [addTask] = useAddTaskMutation();
+
+  const options = [
+    { value: "completed", label: "Completed" },
+    { value: "pending", label: "Pending" },
+  ];
+
+  const handleChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  if (!view) {
+    return null;
+  }
+
+  const closeModal = (e) => {
+    if (e.target.id === "container") {
+      setModal((m) => !m);
     }
-    const closeModal = (e) => {
-      if (e.target.id === "container") {
-        setModal((m) => !m);
+  };
+
+  const createTodo = (e) => {
+    e.preventDefault();
+    addTask({
+      title,
+      description,
+      status: selectedOption,
+      date,
+    }).then((res) => {
+      if (res.data.status === "success") {
+        toast.success("Task added successfully", { duration: 2500 });
+        setTimeout(() => {
+          setModal((m) => !m);
+        }, 1000);
       }
-    };
-  
-    const createTodo = (e) => {
-      e.preventDefault();
-      addTask({
-        title,
-        description,
-        status: selectedOption,
-        date,
-      }).then((res) => {
-        if (res.data.status === "success") {
-          toast.success("Task added successfully", { duration: 2500 });
-          setTimeout(() => {
-            setModal((m) => !m);
-          }, 1000);
-        }
-      });
-    };
+    });
+  };
   return (
     <>
       <Toaster />
@@ -71,6 +70,7 @@ export default function EditModal({ view, setModal }) {
                 className="p-2 bg-slate-200 w-96"
                 onChange={(e) => setTitle(e.target.value)}
                 required
+                value={task.title}
               />
               <br />
               <textarea
@@ -79,12 +79,13 @@ export default function EditModal({ view, setModal }) {
                 className="p-2 bg-slate-200 my-5 w-96"
                 onChange={(e) => setDescription(e.target.value)}
                 required
+                value={task.description}
               />
               <br />
               <div>
                 <h4 className="text-lg font-bold mb-2">Status</h4>
                 <select
-                  value={selectedOption ? selectedOption : "Select an option"}
+                  value={task.status ? task.status : "Select an option"}
                   onChange={handleChange}
                   className="px-20 py-2 border border-gray-400 rounded"
                 >
@@ -101,7 +102,7 @@ export default function EditModal({ view, setModal }) {
                   type="date"
                   className="w-96 p-2 rounded shad"
                   required
-                  value={date}
+                  value={task.date}
                   onChange={(e) => setDate(e.target.value)}
                 />
               </div>
@@ -118,5 +119,5 @@ export default function EditModal({ view, setModal }) {
         </div>
       </div>
     </>
-  )
+  );
 }
