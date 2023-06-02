@@ -14,8 +14,8 @@ export default function Layout({ children }) {
       icon: CiCalendarDate,
     },
     {
-      name: "Scheduled",
-      href: "/scheduled",
+      name: "Pending",
+      href: "/pending",
       icon: CiBoxList,
     },
 
