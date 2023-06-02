@@ -1,7 +1,7 @@
 const express = require("express");
 const Task = require("./models/taskModel");
 require("dotenv").config();
-
+const taskRoute = require("./routes/taskRoute");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -12,6 +12,8 @@ const port = process.env.PORT || 5000;
 app.get("/", (req, res) => {
   res.send("Node Application Server Running");
 });
+
+app.use("/task", taskRoute);
 
 app.post("/task", async (req, res) => {
   try {
@@ -25,15 +27,6 @@ app.post("/task", async (req, res) => {
       },
     });
     console.log(req.body);
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-app.get("/task", async (req, res) => {
-  try {
-    const tasks = await Task.find({});
-    res.send(tasks);
   } catch (error) {
     console.log(error);
   }

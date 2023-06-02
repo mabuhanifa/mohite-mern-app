@@ -17,16 +17,16 @@ export default function Task({ task }) {
         <div>
           <p>Status: {task.status}</p>
         </div>
-        <div className="flex items-center">
-          <span className="text-sm">Created At :</span>
-          <span className="text-gray-400 ml-2 text-xs font-semibold">
+        <div className="flex items-center text-xs">
+          <span >Created At :</span>
+          <span className="text-gray-400 ml-2 font-semibold">
             {task.createdAt.substring(0, 10)}
           </span>
         </div>
 
-        <div className="flex items-center">
-          <span className="text-sm">Pending At :</span>{" "}
-          <span className="text-gray-400 ml-2 text-xs font-semibold mr-28 ">
+        <div className="flex items-center text-xs">
+          <span >Done By :</span>{" "}
+          <span className="text-gray-400 ml-2 font-semibold mr-28 ">
             {task.date}
           </span>
         </div>
