@@ -16,12 +16,13 @@ app.get("/", (req, res) => {
 app.post("/task", async (req, res) => {
   try {
     const { title, description, status, date } = req.body;
-    // const task = await Task.create({ title, description, status, date });
+    const task = await Task.create({ title, description, status, date });
+    console.log(task);
     res.status(201).json({
       status: "success",
-      // data: {
-      //   task,
-      // },
+      data: {
+        task,
+      },
     });
     console.log(req.body);
   } catch (error) {
@@ -32,6 +33,16 @@ app.post("/task", async (req, res) => {
 app.get("/task", async (req, res) => {
   try {
     const tasks = await Task.find({});
+    res.send(tasks);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.delete("/task/:id", async (req, res) => {
+  try {
+    console.log(req.params.id);
+    const tasks = await Task.deleteOne({ _id: req.params.id });
     res.send(tasks);
   } catch (error) {
     console.log(error);
